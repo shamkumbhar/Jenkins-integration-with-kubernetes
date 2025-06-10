@@ -1,3 +1,4 @@
+# Frontend Service and Deployment
 apiVersion: v1
 kind: Service
 metadata:
@@ -31,9 +32,8 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 80
-			
 ---
-
+# Backend (Spring Boot) Service and Deployment
 apiVersion: v1
 kind: Service
 metadata:
@@ -75,20 +75,23 @@ spec:
               value: "root"
             - name: MYSQL_PASSWORD
               value: "root"
+            - name: MYSQL_DATABASE
+              value: "quantumsoft"
 ---
-
-			  
-	apiVersion: v1
+# MySQL Headless Service
+apiVersion: v1
 kind: Service
 metadata:
   name: mysql-service
-spec:	
-  ports:
-    - port: 3306
-  clusterIP: None  # Headless service for StatefulSet
+spec:
+  clusterIP: None
   selector:
     app: mysql
+  ports:
+    - port: 3306
+      targetPort: 3306
 ---
+# MySQL StatefulSet
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -113,4 +116,6 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: "root"
             - name: MYSQL_DATABASE
-              value: "quantumsoft"		
+              value: "quantumsoft"
+          volumeMounts:
+            - name: mysql-persistent-st
