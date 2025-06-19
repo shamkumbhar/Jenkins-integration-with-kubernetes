@@ -117,5 +117,4 @@ spec:
               value: "root"
             - name: MYSQL_DATABASE
               value: "quantumsoft"
-          volumeMounts:
-            - name: mysql-persistent-st
+         
