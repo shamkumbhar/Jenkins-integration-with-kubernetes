@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: shamraokumbhar/frontend:latest
+          image: shamraokumbhar/frontend:p2
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -62,7 +62,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: shamraokumbhar/backend:latest
+          image: shamraokumbhar/backend:b44
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -117,5 +117,4 @@ spec:
               value: "root"
             - name: MYSQL_DATABASE
               value: "quantumsoft"
-          volumeMounts:
-            - name: mysql-persistent-st
+     
